@@ -1,7 +1,7 @@
 <ion-card>
   <ion-card-header>
     <ion-card-title>
-      {{ name || 'Moje počítadlo' }}
+      {{ counterName || 'Moje počítadlo' }}
     </ion-card-title>
   </ion-card-header>
 
@@ -11,7 +11,7 @@
       label-placement="stacked"
       fill="outline"
       placeholder="Například návštěvníci"
-      [(ngModel)]="name"
+      [(ngModel)]="counterName"
     ></ion-input>
 
     <p class="counter-value">{{ count }}</p>
@@ -42,7 +42,7 @@
     <ion-button
       expand="block"
       color="success"
-      [disabled]="!name.trim()"
+      [disabled]="!counterName.trim()"
       (click)="save()"
     >
       Uložit počítadlo

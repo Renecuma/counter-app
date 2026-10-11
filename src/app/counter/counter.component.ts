@@ -8,6 +8,7 @@ import {
   IonCardTitle,
   IonInput,
 } from '@ionic/angular';
+import { SavedCounter } from '../models/saved-counter.model';
 
 @Component({
   selector: 'app-counter',
@@ -25,9 +26,9 @@ import {
   ],
 })
 export class CounterComponent {
-  readonly saved = output<{ name: string; value: number }>();
+  readonly saved = output<SavedCounter>();
 
-  name = '';
+  counterName = '';
   count = 0;
 
   increment(): void {
@@ -45,13 +46,20 @@ export class CounterComponent {
   }
 
   save(): void {
-    if (!this.name.trim()) {
+    const name = this.counterName.trim();
+
+    if (!name) {
       return;
     }
 
-    this.saved.emit({ name: this.name.trim(), value: this.count });
+    this.saved.emit({
+      id: crypto.randomUUID(),
+      name,
+      value: this.count,
+      createdAt: new Date().toISOString(),
+    });
 
-    this.name = '';
+    this.counterName = '';
     this.count = 0;
   }
 }
