@@ -1,0 +1,51 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>
+      {{ name || 'Moje počítadlo' }}
+    </ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-input
+      label="Název počítadla"
+      label-placement="stacked"
+      fill="outline"
+      placeholder="Například návštěvníci"
+      [(ngModel)]="name"
+    ></ion-input>
+
+    <p class="counter-value">{{ count }}</p>
+
+    <div class="counter-actions">
+      <ion-button
+        color="danger"
+        [disabled]="count === 0"
+        (click)="decrement()"
+      >
+        −1
+      </ion-button>
+
+      <ion-button color="primary" (click)="increment()">
+        +1
+      </ion-button>
+
+      <ion-button
+        color="medium"
+        fill="outline"
+        [disabled]="count === 0"
+        (click)="reset()"
+      >
+        Reset
+      </ion-button>
+    </div>
+
+    <ion-button
+      expand="block"
+      color="success"
+      [disabled]="!name.trim()"
+      (click)="save()"
+    >
+      Uložit počítadlo
+    </ion-button>
+  </ion-card-content>
+</ion-card>

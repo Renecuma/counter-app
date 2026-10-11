@@ -1,23 +1,16 @@
-ion-card {
+h2 {
   max-width: 32rem;
-  margin: 1rem auto;
+  margin: 1.5rem auto 0.5rem;
 }
 
-.counter-value {
-  margin: 2rem 0;
-  font-size: 4rem;
-  font-weight: 700;
-  line-height: 1;
+ion-list {
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+.empty-state {
+  max-width: 32rem;
+  margin: 0 auto;
+  color: var(--ion-color-medium);
   text-align: center;
-}
-
-.counter-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  justify-content: center;
-}
-
-.counter-actions ion-button {
-  min-width: 6rem;
 }

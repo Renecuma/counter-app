@@ -5,46 +5,30 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>
-        {{ counterName || 'Moje počítadlo' }}
-      </ion-card-title>
-    </ion-card-header>
+  <app-counter (saved)="onSaved($event)"></app-counter>
 
-    <ion-card-content>
-      <ion-input
-        label="Název počítadla"
-        label-placement="stacked"
-        fill="outline"
-        placeholder="Například návštěvníci"
-        [(ngModel)]="counterName"
-      ></ion-input>
+  <h2>Uložená počítadla</h2>
 
-      <p class="counter-value">{{ count }}</p>
-
-      <div class="counter-actions">
-        <ion-button
-          color="danger"
-          [disabled]="count === 0"
-          (click)="decrement()"
-        >
-          −1
-        </ion-button>
-
-        <ion-button color="primary" (click)="increment()">
-          +1
-        </ion-button>
-
-        <ion-button
-          color="medium"
-          fill="outline"
-          [disabled]="count === 0"
-          (click)="reset()"
-        >
-          Reset
-        </ion-button>
-      </div>
-    </ion-card-content>
-  </ion-card>
+  @if (savedCounters.length > 0) {
+    <ion-list>
+      @for (counter of savedCounters; track counter.id) {
+        <ion-item>
+          <ion-label>
+            <h3>{{ counter.name }}</h3>
+            <ion-note>Hodnota: {{ counter.value }}</ion-note>
+          </ion-label>
+          <ion-button
+            slot="end"
+            color="danger"
+            fill="clear"
+            (click)="removeCounter(counter)"
+          >
+            Smazat
+          </ion-button>
+        </ion-item>
+      }
+    </ion-list>
+  } @else {
+    <p class="empty-state">Zatím nemáte žádná uložená počítadla.</p>
+  }
 </ion-content>
