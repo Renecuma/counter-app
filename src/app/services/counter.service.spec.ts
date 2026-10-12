@@ -124,6 +124,19 @@ describe('CounterService', () => {
     expect(removeMock).toHaveBeenCalledWith({ key: 'saved-counters' });
   });
 
+  it('should compute the average of saved counters', async () => {
+    expect(service.average()).toBeNull();
+
+    await service.add(first);
+    await service.add(second);
+
+    expect(service.average()).toBe(1.5);
+
+    await service.clear();
+
+    expect(service.average()).toBeNull();
+  });
+
   it('should recover from invalid JSON', async () => {
     getMock.mockResolvedValue({
       value: 'this is not a valid JSON',
